@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Vista;
 
-/**
- *
- * @author ASUS
- */
-public class Login extends javax.swing.JFrame {
+import java.util.*;
 
-    /**
-     * Creates new form Login
-     */
+public class Login extends javax.swing.JFrame implements Runnable {
+
+    int hora, minutos, segundos;  
+    Thread h1;
+    
     public Login() {
         initComponents();
+        h1 = new Thread(this);
+        h1.start();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -31,8 +28,9 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        login_button = new javax.swing.JButton();
+        register_button = new javax.swing.JButton();
+        labelHora = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -50,30 +48,42 @@ public class Login extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 14)); // NOI18N
         jTextField3.setText("Ingrese contraseña");
 
-        jButton2.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
-        jButton2.setText("Iniciar Sesión");
+        login_button.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        login_button.setText("Iniciar Sesión");
 
-        jButton3.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
-        jButton3.setText("Registrar");
+        register_button.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        register_button.setText("Registrar");
+        register_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                register_buttonMouseClicked(evt);
+            }
+        });
+
+        labelHora.setText("labelHora");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(login_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(register_button, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,19 +97,27 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(32, 32, 32))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(login_button)
+                            .addComponent(register_button))
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
+    private void register_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_register_buttonMouseClicked
+        Registro reg = new Registro();
+        reg.setVisible( true );
+        this.dispose();
+    }//GEN-LAST:event_register_buttonMouseClicked
+
+    public static void login() {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -130,13 +148,44 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    /**
+     * Calcula la hora, minutos y segundos para el reloj
+     * Usa una instancia de Calendar para obtener la hora actual
+     */
+    public void calcula (){
+        Calendar calendario = new GregorianCalendar();
+        hora = calendario.get( Calendar.HOUR_OF_DAY );
+        minutos = calendario.get( Calendar.MINUTE );
+        segundos = calendario.get( Calendar.SECOND );
+    }      
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel labelHora;
+    private javax.swing.JButton login_button;
+    private javax.swing.JButton register_button;
     // End of variables declaration//GEN-END:variables
+
+    /**
+    * Sobrescribe el método run() de la interfaz Runnable
+    * Aquí se ejecutan las operaciones del hilo reloj
+    * La hora calculada por el hilo se coloca en la etiqueta de la interfaz
+    */
+    @Override
+    public void run() {
+        Thread ct = Thread.currentThread();
+        while (ct == h1) {
+            calcula();
+            this.labelHora.setText(hora + ":" + minutos + ":" + segundos);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+            }
+        }
+    }
 }
