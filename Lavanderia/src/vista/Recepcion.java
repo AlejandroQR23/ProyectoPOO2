@@ -13,7 +13,7 @@ public class Recepcion extends javax.swing.JFrame {
     public Recepcion( String sucursal/* SUCURSAL */  ) { 
         initComponents();
         setLocationRelativeTo(null);
-        
+        PropiedadesTabla();
         /*  IF SUCURSAL 1.ShowInfo LABELS*/
         //Creamos el mediador
         LinkedList precios = new LinkedList();
@@ -50,7 +50,7 @@ public class Recepcion extends javax.swing.JFrame {
         DefaultTableModel dtm = new DefaultTableModel(null, titulo){
             @Override
             public boolean isCellEditable(int filas, int columnas) {
-                return (columnas == 8)? true : false;
+                return (columnas == 20)? true : false;
                 
             }
         };
