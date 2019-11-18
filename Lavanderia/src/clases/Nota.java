@@ -7,7 +7,7 @@ public class Nota{
     //Atributos propios
     Date fecha_recepcion;
     Date fecha_entrega;
-    String num_nota = "123";
+    String num_nota;
 
     //Instancia del mediador
     Lavanderia lavanderia;

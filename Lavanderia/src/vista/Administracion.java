@@ -46,6 +46,7 @@ public class Administracion extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listaUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(listaUsuarios);
 
         jLabel4.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N

@@ -29,7 +29,7 @@ public class Lavanderia implements ILavanderia, Serializable{
     float ganancias;
 
     //Carpeta de archivos
-    File carpeta = new File( "Notas" + "/" );
+    File carpeta = new File( "/src/Notas" + "/" );
 
     public Lavanderia( String sucursal, String direccion, LinkedList precios ){
         this.carpeta.mkdir();
