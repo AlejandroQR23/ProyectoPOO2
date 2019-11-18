@@ -7,6 +7,8 @@ public class Cliente{
 
     //atributos propios
     String nombre; //nombre completo
+    String usuario;
+    String contrasena;
     String direccion; //formato calle-numero-colonia
     String telefono;
 
@@ -33,5 +35,23 @@ public class Cliente{
     public String getTelefono(){
         return this.telefono;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    
 
 }
