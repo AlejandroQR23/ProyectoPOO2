@@ -16,8 +16,7 @@ interface ILavanderia
 /**
 * La clase mediadora concreta
 */
-public class Lavanderia implements ILavanderia
-{
+public class Lavanderia implements ILavanderia, Serializable{
 
     //Instrancias de colaboradores
     Cliente cliente;
@@ -27,7 +26,7 @@ public class Lavanderia implements ILavanderia
     //Atributos propios de la sucursal
     String sucursal;
     String direccion;
-    Hashtable<String, Float> prendas;
+    private List<Prenda> prendas;
     float ganancias;
 
     //Carpeta de archivos
@@ -74,20 +73,12 @@ public class Lavanderia implements ILavanderia
         this.direccion = direccion;
     }
 
-    public Hashtable<String, Float> getPrendas() {
+    public List<Prenda> getPrendas() {
         return prendas;
     }
 
-    public void setPrendas( LinkedList precios ) {
-        this.prendas = new Hashtable<>();
-        //                        Parseo a Object Float, sera así?
-        this.prendas.put("Saco", (Float) precios.get(0) );
-        this.prendas.put("Pantalon", (Float) precios.get(1) );
-        this.prendas.put("Abrigo", (Float) precios.get(2) );
-        this.prendas.put("Camisa", (Float) precios.get(3) );
-        this.prendas.put("Playera", (Float) precios.get(4) );
-        this.prendas.put("Corbata", (Float) precios.get(5) );
-        this.prendas.put("Chamarra", (Float) precios.get(6) );
+    public void setPrendas(List<Prenda> prendas) {
+        this.prendas = prendas;
     }
 
     public float getGanancias() {
@@ -106,7 +97,8 @@ public class Lavanderia implements ILavanderia
         this.carpeta = carpeta;
     }
     
-    ///////////////
+    
+    
     @Override
     public void registrarCliente( Cliente cliente ){
         this.cliente = cliente;
