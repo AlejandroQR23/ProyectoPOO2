@@ -21,7 +21,7 @@ public class Recepcion extends javax.swing.JFrame {
 
         //Asociamos el mediador a los colaboradores
         Nota nota = new Nota( lv );
-        Cliente cliente = new Cliente( "Lola Mento", "Av. Portuano", "7471673185" );
+        Cliente cliente = new Cliente( "Lola Mento", "","","Av. Portuano", "7471673185" );
 
         //inicio de sesion
         cliente.iniciarSesion( lv );

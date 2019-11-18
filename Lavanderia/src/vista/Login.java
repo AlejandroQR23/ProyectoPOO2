@@ -1,10 +1,13 @@
 package vista;
 
+import clases.Cliente;
+import logica.*;
 import java.util.*;
 import javax.swing.JOptionPane;
-import logica.cLogin;
+
 
 public class Login extends javax.swing.JFrame implements Runnable {
+    List<Cliente> clientes;
     int hora, minutos, segundos;  
     Thread h1;
     
@@ -191,6 +194,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
             this.dispose();   
             //JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public static void login() {

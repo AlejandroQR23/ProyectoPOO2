@@ -1,53 +1,51 @@
-/*
 
- */
 package logica;
 
-import clases.Lavanderia;
+import clases.Cliente;
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ASUS
  */
 public class cCliente {
-    	public static void GuardarLista( List<Lavanderia> lista ){
-		Scanner sc = new Scanner(System.in);
-		System.out.print("\n GUARDAR LISTA | nombre del archivo : ");
-        String nombre_archivo = sc.nextLine();
-		ObjectOutputStream ArchObjeto;
+    public static void GuardarLista( List<Cliente> lista ){
+        ObjectOutputStream ArchObjeto;
 
+        // Guardando lista
         try {
-            ArchObjeto = new ObjectOutputStream(new FileOutputStream(nombre_archivo));
+            ArchObjeto = new ObjectOutputStream(new FileOutputStream( "clientes.dat" ));
             ArchObjeto.writeObject( lista );
-			ArchObjeto.close();
+            ArchObjeto.close();
+
         } catch(FileNotFoundException e){
-			System.out.println("ERROR: No se encontro el archivo\n" + e.getMessage());
-		} catch (IOException e){
-            System.out.println("ERROR: E/S\n" + e.getMessage());
-		}
+            JOptionPane.showMessageDialog(null, "No se encontro archivo"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e){
+            JOptionPane.showMessageDialog(null, "E/S de datos"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-	} // Fin GuardarLista
+    } // Fin GuardarLista
 
-	public static List<Lavanderia> AbrirLista(){
-		Scanner sc = new Scanner(System.in);
-		ObjectInputStream fileIn;
-        List<Lavanderia> alumnos2 = new LinkedList<Lavanderia>();
-
-        System.out.print("\n CARGAR LISTA | nombre del archivo : ");
+    public static List<Cliente> AbrirLista(){
+        ObjectInputStream fileIn;
+        List<Cliente> clientes = new LinkedList<>();
+        // Cargando lista
         try{
-            fileIn = new ObjectInputStream(new FileInputStream(sc.nextLine()));
-            alumnos2 = (List<Lavanderia>) fileIn.readObject();
+            fileIn = new ObjectInputStream(new FileInputStream("clientes.dat"));
+            clientes = (List<Cliente>) fileIn.readObject();
             fileIn.close();
 
-		} catch(FileNotFoundException e){
-			System.out.println("ERROR: No se encontro el archivo\n" + e.getMessage());
-		} catch (IOException e){
-            System.out.println("ERROR: E/S\n" + e.getMessage());
+        } catch(FileNotFoundException e){
+            JOptionPane.showMessageDialog(null, "No se encontro archivo"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IOException e){
+            JOptionPane.showMessageDialog(null, "E/S de datos"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException e) {
-            System.out.println("ERROR: Clase no encontrada\n" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Clase no encontrada"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         }
-		return alumnos2;
-	} // Fin AbrirLista
+        return clientes;
+
+    } // Fin AbrirLista
+    
 }

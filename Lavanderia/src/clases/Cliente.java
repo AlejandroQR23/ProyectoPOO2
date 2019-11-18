@@ -1,6 +1,8 @@
 package clases;
 
-public class Cliente{
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
 
     //instancia del mediador
     Lavanderia lavanderia;
@@ -12,8 +14,10 @@ public class Cliente{
     String direccion; //formato calle-numero-colonia
     String telefono;
 
-    public Cliente( String nombre, String direccion, String telefono ){
+    public Cliente(String nombre, String usuario, String contrasena, String direccion, String telefono) {
         this.nombre = nombre;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
         this.direccion = direccion;
         this.telefono = telefono;
     }
