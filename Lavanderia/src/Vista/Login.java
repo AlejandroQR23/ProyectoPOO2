@@ -1,6 +1,8 @@
 package Vista;
 
 import java.util.*;
+import javax.swing.JOptionPane;
+import Logica.cLogin;
 
 public class Login extends javax.swing.JFrame implements Runnable {
 
@@ -8,12 +10,20 @@ public class Login extends javax.swing.JFrame implements Runnable {
     Thread h1;
     
     public Login() {
+        String[] sucursales = {"Ajusco", "Tlahuac", "Acoxpa"};
+        String opcion = "";
+        
         initComponents();
+        setLocationRelativeTo(null);
         TextPrompt usuario = new TextPrompt("Ingresa usuario", fieldUsuario);
         TextPrompt contrasena = new TextPrompt("Ingresa contraseña", fieldContrasena);
         h1 = new Thread(this);
         h1.start();
-        setLocationRelativeTo(null);
+        // Pedimos que seleccione una sucursal
+        if( opcion.length() == 0 ){
+            opcion = (String) JOptionPane.showInputDialog(null, "Selecciona la surcusal más conveniente", 
+                    "Sucursal", JOptionPane.DEFAULT_OPTION, null, sucursales, sucursales[0]);
+        }
     }
 
     /**
@@ -166,10 +176,27 @@ public class Login extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnRegistroMouseClicked
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // Si es correcto el usuario y contrasena
-        Recepcion suc = new Recepcion();
-        suc.setVisible( true );
-        this.dispose();
+        if( fieldUsuario.getText().length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un Usuario", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldUsuario.requestFocus();
+            return;
+        }
+        
+        if( fieldContrasena.getText().length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar una Contrasena", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldContrasena.requestFocus();
+            return;
+        }
+        
+        cLogin funcion = new cLogin(fieldUsuario.getText(), fieldContrasena.getText());
+        if( funcion.IniciarSesion() ){
+            Recepcion rec = new Recepcion();
+            rec.setVisible( true );
+            this.dispose();    
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     public static void login() {

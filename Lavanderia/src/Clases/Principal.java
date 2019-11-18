@@ -1,4 +1,4 @@
-package Logica;
+package Clases;
 // Importa login de principal
 import Vista.Login;
 

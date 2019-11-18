@@ -141,10 +141,10 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        /* Si se registra correctamente
+        /* Si se registra correctamente */
         Login log = new Login();
         log.setVisible( true );
-        this.dispose();*/
+        this.dispose();
     }//GEN-LAST:event_btnRegistroMouseClicked
 
     private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
