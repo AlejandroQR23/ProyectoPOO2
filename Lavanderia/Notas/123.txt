@@ -47,3 +47,24 @@ Estado:
 Fecha de recepcion: Mon Nov 18 12:19:58 CST 2019
 Fecha de entrega: Wed Nov 20 12:19:58 CST 2019
 Estado: 
+ - CLIENTE: - 
+ Nombre: Lola Mento Telefono: 7471673185
+ Direccion de facturacion: Av. Portuano
+ - DATOS DE RECEPCION - 
+Fecha de recepcion: Mon Nov 18 12:42:21 CST 2019
+Fecha de entrega: Wed Nov 20 12:42:21 CST 2019
+Estado: 
+ - CLIENTE: - 
+ Nombre: Lola Mento Telefono: 7471673185
+ Direccion de facturacion: Av. Portuano
+ - DATOS DE RECEPCION - 
+Fecha de recepcion: Mon Nov 18 12:56:14 CST 2019
+Fecha de entrega: Wed Nov 20 12:56:14 CST 2019
+Estado: 
+ - CLIENTE: - 
+ Nombre: Lola Mento Telefono: 7471673185
+ Direccion de facturacion: Av. Portuano
+ - DATOS DE RECEPCION - 
+Fecha de recepcion: Mon Nov 18 13:16:12 CST 2019
+Fecha de entrega: Wed Nov 20 13:16:12 CST 2019
+Estado: 

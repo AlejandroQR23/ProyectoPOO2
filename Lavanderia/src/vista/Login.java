@@ -186,7 +186,10 @@ public class Login extends javax.swing.JFrame implements Runnable {
             this.dispose();    
         }
         else{
-            JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+            Administracion adm = new Administracion();
+            adm.setVisible( true );
+            this.dispose();   
+            //JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 

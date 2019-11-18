@@ -78,6 +78,12 @@ public class Recepcion extends javax.swing.JFrame {
         panel2 = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        panel3 = new javax.swing.JPanel();
+        labelAdquirir = new javax.swing.JLabel();
+        labelAdquirir2 = new javax.swing.JLabel();
+        btnAdquirir = new javax.swing.JButton();
+        panelLogo = new javax.swing.JPanel();
+        labelLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Servicio");
@@ -133,7 +139,76 @@ public class Recepcion extends javax.swing.JFrame {
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(ScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
+            .add(ScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+        panel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        labelAdquirir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        labelAdquirir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAdquirir.setText("Seleccione el o los servicios");
+        labelAdquirir.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        labelAdquirir2.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        labelAdquirir2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelAdquirir2.setText("que desea adquirir");
+        labelAdquirir2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        btnAdquirir.setBackground(new java.awt.Color(0, 153, 204));
+        btnAdquirir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
+        btnAdquirir.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdquirir.setText("Adquirir");
+        btnAdquirir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAdquirirMouseClicked(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout panel3Layout = new org.jdesktop.layout.GroupLayout(panel3);
+        panel3.setLayout(panel3Layout);
+        panel3Layout.setHorizontalGroup(
+            panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(labelAdquirir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(labelAdquirir2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .add(panel3Layout.createSequentialGroup()
+                .add(40, 40, 40)
+                .add(btnAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 144, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panel3Layout.setVerticalGroup(
+            panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(labelAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(labelAdquirir2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
+                .add(btnAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+
+        panelLogo.setBackground(new java.awt.Color(0, 153, 153));
+
+        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Logo.png"))); // NOI18N
+
+        org.jdesktop.layout.GroupLayout panelLogoLayout = new org.jdesktop.layout.GroupLayout(panelLogo);
+        panelLogo.setLayout(panelLogoLayout);
+        panelLogoLayout.setHorizontalGroup(
+            panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLogoLayout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(labelLogo)
+                .add(37, 37, 37))
+        );
+        panelLogoLayout.setVerticalGroup(
+            panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panelLogoLayout.createSequentialGroup()
+                .add(labelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout panelLayout = new org.jdesktop.layout.GroupLayout(panel);
@@ -143,13 +218,22 @@ public class Recepcion extends javax.swing.JFrame {
             .add(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                    .add(panel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(panelLayout.createSequentialGroup()
+                        .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -157,9 +241,7 @@ public class Recepcion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -168,6 +250,14 @@ public class Recepcion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdquirirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdquirirMouseClicked
+        
+        // Despues de agregar nota
+        Login log = new Login();
+        log.setVisible( true );
+        this.dispose();
+    }//GEN-LAST:event_btnAdquirirMouseClicked
 
     /**
      * @param args argumentos
@@ -206,8 +296,14 @@ public class Recepcion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton btnAdquirir;
+    private javax.swing.JLabel labelAdquirir;
+    private javax.swing.JLabel labelAdquirir2;
+    private javax.swing.JLabel labelLogo;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
+    private javax.swing.JPanel panel3;
+    private javax.swing.JPanel panelLogo;
     // End of variables declaration//GEN-END:variables
 
 }

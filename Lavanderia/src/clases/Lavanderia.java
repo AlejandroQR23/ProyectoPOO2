@@ -1,16 +1,15 @@
 package clases;
+
 import java.io.*; //para archivos
 import java.util.*;
 
 /**
 * La interfaz mediadora
 */
-interface ILavanderia
-{
+interface ILavanderia {
     public void generarNota( Date recepcion, Date entrega, String numero ) throws IOException;
     public void registrarCliente( Cliente cliente );
     //void agregarPrendas();
-
 }
 
 /**
@@ -33,9 +32,9 @@ public class Lavanderia implements ILavanderia, Serializable{
     File carpeta = new File( "Notas" + "/" );
 
     public Lavanderia( String sucursal, String direccion, LinkedList precios ){
+        this.carpeta.mkdir();
         setSucursal( sucursal );
         setDireccion( direccion );
-        this.carpeta.mkdir();
         setPrendas( precios );
         ganancias = 0;
     }

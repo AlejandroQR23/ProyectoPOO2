@@ -1,6 +1,6 @@
 package clases;
-public class Cliente
-{
+
+public class Cliente{
 
     //instancia del mediador
     Lavanderia lavanderia;

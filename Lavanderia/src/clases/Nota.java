@@ -2,13 +2,12 @@ package clases;
 import java.util.*; //para las fechas y calendarios
 import java.io.*;
 
-public class Nota
-{
+public class Nota{
 
     //Atributos propios
     Date fecha_recepcion;
     Date fecha_entrega;
-    String num_nota;
+    String num_nota = "123";
 
     //Instancia del mediador
     Lavanderia lavanderia;
@@ -31,7 +30,7 @@ public class Nota
     }
 
     public void crearNota() throws IOException {
-        lavanderia.generarNota( fecha_recepcion, fecha_entrega, "123" );
+        lavanderia.generarNota( fecha_recepcion, fecha_entrega, num_nota );
     }
 
 }
