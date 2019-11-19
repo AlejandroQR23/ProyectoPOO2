@@ -1,6 +1,7 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Cliente implements Serializable {
 
@@ -22,9 +23,33 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
+    /**
+     * Asocia un cliente cuya sesión ha
+     * sido iniciada a la lavandería
+     * @param lavanderia 
+     */
     public void iniciarSesion( Lavanderia lavanderia ){
         this.lavanderia = lavanderia;
         lavanderia.registrarCliente( this );
+    }
+    
+    /**
+     * Para el usuario administrador:
+     * muestra todas las notas no entregadas 
+     * de la lavandería
+     */
+    public void verNotas(){
+        lavanderia.mostrarNotas();
+    }
+    
+    /**
+     * A partir del nombre de la nota introducido
+     * por el usuario, se hace entrega de la ropa
+     * al cliente que lo solicita
+     * @param nota 
+     */
+    public void recibirRopa( String nota ){
+        lavanderia.entregarRopa( nota );
     }
 
     //Getters y Setters
