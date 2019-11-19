@@ -182,39 +182,40 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        if( fieldNombre.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Nombre", "Aviso", JOptionPane.WARNING_MESSAGE);
-            fieldNombre.requestFocus();
-            return;
-        }
-        if( fieldUsuario.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Usuario", "Aviso", JOptionPane.WARNING_MESSAGE);
-            fieldUsuario.requestFocus();
-            return;
-        }
-        if( fieldContrasena.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Debes ingresar una Contrasena", "Aviso", JOptionPane.WARNING_MESSAGE);
-            fieldContrasena.requestFocus();
-            return;
-        }
-        if( fieldDireccion.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Debes ingresar una Direccion", "Aviso", JOptionPane.WARNING_MESSAGE);
-            fieldDireccion.requestFocus();
-            return;
-        }
-        if( fieldTelefono.getText().length() == 0 ){
-            JOptionPane.showMessageDialog(null, "Debes ingresar un Telefono", "Aviso", JOptionPane.WARNING_MESSAGE);
-            fieldTelefono.requestFocus();
-            return;
-        }
-        System.out.println("U N O O O O O O O O_______________");
-        /* Ingreso los datos correctamente */
+        // Lectura de campos (fields)
         String nombre = fieldNombre.getText();
         String usuario = fieldUsuario.getText();
         String contrasena = fieldContrasena.getText();
         String direccion = fieldDireccion.getText();
         String telefono = fieldTelefono.getText();
         
+        if( nombre.length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un Nombre", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldNombre.requestFocus();
+            return;
+        }
+        if( usuario.length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un Usuario", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldUsuario.requestFocus();
+            return;
+        }
+        if( contrasena.length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar una Contrasena", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldContrasena.requestFocus();
+            return;
+        }
+        if( direccion.length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar una Direccion", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldDireccion.requestFocus();
+            return;
+        }
+        if( telefono.length() == 0 ){
+            JOptionPane.showMessageDialog(null, "Debes ingresar un Telefono", "Aviso", JOptionPane.WARNING_MESSAGE);
+            fieldTelefono.requestFocus();
+            return;
+        }
+        
+        /* Ingreso los datos correctamente */        
         Cliente cliente = new Cliente( nombre, usuario, contrasena, direccion, telefono );
         
         clientes = new LinkedList<>();
@@ -222,13 +223,15 @@ public class Registro extends javax.swing.JFrame {
         // Si el archivo no existe
         File fichero = new File("clientes.dat");
         if( fichero.exists() == false ){
+            clientes = new LinkedList<>();
             clientes.add( cliente );
             cCliente.GuardarLista(clientes);
         }
-        // Si existe el archivo
-        clientes = cCliente.AbrirLista();
-        clientes.add( cliente );
-        cCliente.GuardarLista( clientes );
+        else{ // Si el archivo existe
+            clientes = cCliente.AbrirLista();
+            clientes.add( cliente );
+            cCliente.GuardarLista( clientes );
+        }
         
         JOptionPane.showMessageDialog(null, "Registrado correctamente");
         Login log = new Login();

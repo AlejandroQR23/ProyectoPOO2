@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class Recepcion extends javax.swing.JFrame {
 
     /** Crea nuevo formulario Sucursal */
-    public Recepcion( String sucursal/* SUCURSAL */  ) { 
+    public Recepcion() { 
         initComponents();
         setLocationRelativeTo(null);
         PropiedadesTabla();
@@ -288,7 +288,7 @@ public class Recepcion extends javax.swing.JFrame {
         /* Crea y muestra el Formulario */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Recepcion( ""/* TIPO DE SUCURSAL */ ).setVisible(true);
+                new Recepcion().setVisible(true);
             }
         });
     }

@@ -13,6 +13,7 @@ public class Administracion extends javax.swing.JFrame {
     /** Crea nuevo formulario Administracion */
     public Administracion() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /** 
