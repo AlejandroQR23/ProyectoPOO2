@@ -21,9 +21,9 @@ public class cCliente {
             ArchObjeto.close();
 
         } catch(FileNotFoundException e){
-            JOptionPane.showMessageDialog(null, "No se encontro archivo"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se encontro archivo: \n"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException e){
-            JOptionPane.showMessageDialog(null, "E/S de datos"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "E/S de datos: \n"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     } // Fin GuardarLista
@@ -38,11 +38,11 @@ public class cCliente {
             fileIn.close();
 
         } catch(FileNotFoundException e){
-            JOptionPane.showMessageDialog(null, "No se encontro archivo"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se encontro archivo: \n"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IOException e){
-            JOptionPane.showMessageDialog(null, "E/S de datos"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "E/S de datos: \n"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         } catch (ClassNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Clase no encontrada"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Clase no encontrada: \n"+e.getMessage() , "Error", JOptionPane.ERROR_MESSAGE);
         }
         return clientes;
 

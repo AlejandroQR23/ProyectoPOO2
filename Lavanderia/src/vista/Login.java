@@ -1,6 +1,7 @@
 package vista;
 
 import clases.Cliente;
+import clases.Principal;
 import logica.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -34,7 +35,6 @@ public class Login extends javax.swing.JFrame implements Runnable {
         btnLogin = new javax.swing.JButton();
         btnRegistro = new javax.swing.JButton();
         labelLogo = new javax.swing.JLabel();
-        panel2 = new javax.swing.JPanel();
         fieldContrasena = new javax.swing.JPasswordField();
         labelHora = new javax.swing.JLabel();
 
@@ -72,22 +72,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
 
         labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Logo.png"))); // NOI18N
 
-        panel2.setBackground(new java.awt.Color(255, 255, 255));
-        panel2.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
-        panel2.setLayout(panel2Layout);
-        panel2Layout.setHorizontalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 116, Short.MAX_VALUE)
-        );
-        panel2Layout.setVerticalGroup(
-            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 27, Short.MAX_VALUE)
-        );
-
         fieldContrasena.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        fieldContrasena.setText("jPasswordField1");
 
         labelHora.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
         labelHora.setForeground(new java.awt.Color(0, 102, 102));
@@ -100,8 +85,6 @@ public class Login extends javax.swing.JFrame implements Runnable {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelHora, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,29 +96,27 @@ public class Login extends javax.swing.JFrame implements Runnable {
                         .addComponent(btnLogin)))
                 .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                    .addGap(137, 137, 137)
-                    .addComponent(labelLogo)
-                    .addContainerGap(105, Short.MAX_VALUE))
                 .addGroup(panelLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(labelContrasena)
-                        .addComponent(labelUsuario))
-                    .addGap(8, 8, 8)
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(fieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelLayout.createSequentialGroup()
+                            .addGap(137, 137, 137)
+                            .addComponent(labelLogo))
+                        .addGroup(panelLayout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(labelContrasena)
+                                .addComponent(labelUsuario))
+                            .addGap(8, 8, 8)
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnRegistro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(fieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addContainerGap(86, Short.MAX_VALUE)))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLayout.createSequentialGroup()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelHora)))
+                .addContainerGap()
+                .addComponent(labelHora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
                 .addComponent(fieldContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -205,12 +186,14 @@ public class Login extends javax.swing.JFrame implements Runnable {
             if(usuario.equals("admin") && contrasena.equals("admin")){
                 Administracion adm = new Administracion();
                 adm.setVisible( true );
+                //i.iniciarSesion(Principal.sucursal);
                 this.dispose();
                 return;
             }
             if( usuarioActual.equals(usuario) && contrasenaActual.equals(contrasena)){
                 Recepcion rec = new Recepcion();
                 rec.setVisible( true );
+                //i.iniciarSesion(Principal.sucursal);
                 this.dispose();
                 return;
             }
@@ -270,7 +253,6 @@ public class Login extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel labelUsuario;
     private javax.swing.JPanel panel;
-    private javax.swing.JPanel panel2;
     // End of variables declaration//GEN-END:variables
 
     /**

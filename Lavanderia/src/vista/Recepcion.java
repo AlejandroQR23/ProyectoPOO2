@@ -13,45 +13,29 @@ public class Recepcion extends javax.swing.JFrame {
     public Recepcion() { 
         initComponents();
         setLocationRelativeTo(null);
-        PropiedadesTabla();
-        /*  IF SUCURSAL 1.ShowInfo LABELS*/
-        //Creamos el mediador
-        LinkedList precios = new LinkedList();
-        Lavanderia lv = new Lavanderia("Acoxpa","Acoxpa", precios);
-
-        //Asociamos el mediador a los colaboradores
-        Nota nota = new Nota( lv );
-        Cliente cliente = new Cliente( "Lola Mento", "","","Av. Portuano", "7471673185" );
-
-        //inicio de sesion
-        cliente.iniciarSesion( lv );
-
-        //imprimir nota
-        try{
-            nota.crearNota();
-        } catch( IOException e ){
-            System.out.println("");
-        }
+        PropiedadesTablaServicios();
+        labelInformacion.setText("<html><body>Sucursal: "+Principal.opcion+"<br> Direccion:"+Principal.sucursal.getDireccion()+"</body></html>");
         
-        /*
-        IF SUCURSAL 2.ShowInfo LABELS
-        IF SUCURSAL 3.ShowInfo LABELS
-        */
+        /* IF SUCURSAL 1.ShowInfo LABELS */
+        /* IF SUCURSAL 2.ShowInfo LABELS */
+        /* IF SUCURSAL 3.ShowInfo LABELS */
     }
 
-    private void PropiedadesTabla(){
+    private void PropiedadesTablaServicios(){
         String titulo[] = {"Prendas", "Precio"};
-        String list1[] = {"Prenda", "$100"};
-        String list2[] = {"Prenda", "$100"};
-        String list3[] = {"Prenda", "$100"};
-        String list4[] = {"Prenda", "$100"};
-        String list5[] = {"Prenda", "$100"};
+        List<Prenda> prendas = Principal.sucursal.getPrendas();
+        /*   Mostrar los datos de la Sucursal en la tabla de Recepcion   */
+        
+        String list1[] = {prendas.get(0).getNombre(), String.valueOf(prendas.get(0).getPrecio())};
+        String list2[] = {prendas.get(1).getNombre(), String.valueOf(prendas.get(1).getPrecio())};
+        String list3[] = {prendas.get(2).getNombre(), String.valueOf(prendas.get(2).getPrecio())};
+        String list4[] = {prendas.get(3).getNombre(), String.valueOf(prendas.get(3).getPrecio())};
+        String list5[] = {prendas.get(4).getNombre(), String.valueOf(prendas.get(4).getPrecio())};
         
         DefaultTableModel dtm = new DefaultTableModel(null, titulo){
             @Override
             public boolean isCellEditable(int filas, int columnas) {
-                return (columnas == 20)? true : false;
-                
+                return (columnas == 20);
             }
         };
         
@@ -80,13 +64,17 @@ public class Recepcion extends javax.swing.JFrame {
         Tabla = new javax.swing.JTable();
         panel3 = new javax.swing.JPanel();
         labelAdquirir = new javax.swing.JLabel();
-        labelAdquirir2 = new javax.swing.JLabel();
-        btnAdquirir = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
         panelLogo = new javax.swing.JPanel();
         labelLogo = new javax.swing.JLabel();
+        panel4 = new javax.swing.JPanel();
+        labelNumeroNota = new javax.swing.JLabel();
+        fieldNumeroNota = new javax.swing.JTextField();
+        btnRecibir = new javax.swing.JButton();
+        labelInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Servicio");
+        setTitle("Recepcion");
 
         panel.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -149,18 +137,13 @@ public class Recepcion extends javax.swing.JFrame {
         labelAdquirir.setText("Seleccione el o los servicios");
         labelAdquirir.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        labelAdquirir2.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        labelAdquirir2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdquirir2.setText("que desea adquirir");
-        labelAdquirir2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        btnAdquirir.setBackground(new java.awt.Color(0, 153, 204));
-        btnAdquirir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
-        btnAdquirir.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdquirir.setText("Adquirir");
-        btnAdquirir.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
+        btnAceptar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
+        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAdquirirMouseClicked(evt);
+                btnAceptarMouseClicked(evt);
             }
         });
 
@@ -170,25 +153,21 @@ public class Recepcion extends javax.swing.JFrame {
             panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(labelAdquirir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(labelAdquirir2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(labelAdquirir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .add(panel3Layout.createSequentialGroup()
                 .add(40, 40, 40)
-                .add(btnAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 144, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(btnAceptar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 144, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(labelAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(labelAdquirir2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
-                .add(btnAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(btnAceptar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(42, 42, 42))
         );
 
         panelLogo.setBackground(new java.awt.Color(0, 153, 153));
@@ -199,16 +178,68 @@ public class Recepcion extends javax.swing.JFrame {
         panelLogo.setLayout(panelLogoLayout);
         panelLogoLayout.setHorizontalGroup(
             panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLogoLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(panelLogoLayout.createSequentialGroup()
+                .add(19, 19, 19)
                 .add(labelLogo)
-                .add(37, 37, 37))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelLogoLayout.setVerticalGroup(
             panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelLogoLayout.createSequentialGroup()
-                .add(labelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLogoLayout.createSequentialGroup()
+                .add(0, 154, Short.MAX_VALUE)
+                .add(labelLogo))
+        );
+
+        panel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        labelNumeroNota.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        labelNumeroNota.setText("Ingrese # Nota:");
+
+        fieldNumeroNota.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
+
+        btnRecibir.setBackground(new java.awt.Color(0, 102, 102));
+        btnRecibir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
+        btnRecibir.setForeground(new java.awt.Color(255, 255, 255));
+        btnRecibir.setText("Recibir");
+
+        labelInformacion.setFont(new java.awt.Font("Microsoft YaHei Light", 2, 14)); // NOI18N
+        labelInformacion.setText("Informacion");
+        labelInformacion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        org.jdesktop.layout.GroupLayout panel4Layout = new org.jdesktop.layout.GroupLayout(panel4);
+        panel4.setLayout(panel4Layout);
+        panel4Layout.setHorizontalGroup(
+            panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panel4Layout.createSequentialGroup()
+                .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panel4Layout.createSequentialGroup()
+                        .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panel4Layout.createSequentialGroup()
+                                .add(35, 35, 35)
+                                .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                    .add(labelNumeroNota)))
+                            .add(panel4Layout.createSequentialGroup()
+                                .add(55, 55, 55)
+                                .add(btnRecibir)))
+                        .add(0, 29, Short.MAX_VALUE))
+                    .add(panel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(labelInformacion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+        );
+        panel4Layout.setVerticalGroup(
+            panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(panel4Layout.createSequentialGroup()
+                .add(20, 20, 20)
+                .add(labelNumeroNota)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(27, 27, 27)
+                .add(btnRecibir)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 59, Short.MAX_VALUE)
+                .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(56, 56, 56))
         );
 
         org.jdesktop.layout.GroupLayout panelLayout = new org.jdesktop.layout.GroupLayout(panel);
@@ -218,22 +249,28 @@ public class Recepcion extends javax.swing.JFrame {
             .add(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(18, 18, 18)
                 .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                     .add(panel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(panelLayout.createSequentialGroup()
-                        .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .add(0, 8, Short.MAX_VALUE)
+                        .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(panelLayout.createSequentialGroup()
+                                .add(panelLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(14, 14, 14)
+                                .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
 
@@ -241,7 +278,9 @@ public class Recepcion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(layout.createSequentialGroup()
+                .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -251,13 +290,13 @@ public class Recepcion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAdquirirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdquirirMouseClicked
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         
         // Despues de agregar nota
         Login log = new Login();
         log.setVisible( true );
         this.dispose();
-    }//GEN-LAST:event_btnAdquirirMouseClicked
+    }//GEN-LAST:event_btnAceptarMouseClicked
 
     /**
      * @param args argumentos
@@ -296,13 +335,17 @@ public class Recepcion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JTable Tabla;
-    private javax.swing.JButton btnAdquirir;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnRecibir;
+    private javax.swing.JTextField fieldNumeroNota;
     private javax.swing.JLabel labelAdquirir;
-    private javax.swing.JLabel labelAdquirir2;
+    private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel labelLogo;
+    private javax.swing.JLabel labelNumeroNota;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
+    private javax.swing.JPanel panel4;
     private javax.swing.JPanel panelLogo;
     // End of variables declaration//GEN-END:variables
 

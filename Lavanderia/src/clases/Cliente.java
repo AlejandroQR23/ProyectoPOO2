@@ -1,7 +1,6 @@
 package clases;
 
 import java.io.Serializable;
-import java.util.Scanner;
 
 public class Cliente implements Serializable {
 

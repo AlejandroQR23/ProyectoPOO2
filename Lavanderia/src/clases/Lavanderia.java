@@ -25,26 +25,24 @@ public class Lavanderia implements ILavanderia, Serializable{
 
     //Instrancias de colaboradores
     Cliente cliente;
-    //List< Prenda > prendas;
     Nota nota;
 
     //Atributos propios de la sucursal
-    String sucursal;
-    String direccion;
-    private List<Prenda> prendas;
-    float ganancias;
+    private String sucursal;
+    private String direccion;
+    private LinkedList<Prenda> prendas;
+    private float ganancias;
 
     //Carpeta de archivos
-    File carpeta = new File( "/src/Notas" + "/" );
+    File carpeta = new File( "Notas/");
 
-    public Lavanderia( String sucursal, String direccion, LinkedList precios ){
+    public Lavanderia( String sucursal, String direccion, LinkedList prendas ){
         this.carpeta.mkdir();
         setSucursal( sucursal );
         setDireccion( direccion );
-        setPrendas( precios );
+        setPrendas( prendas );
         ganancias = 0;
     }
-    ///////////////
 
     //Getters y Setters
     public Cliente getCliente() {
@@ -83,7 +81,7 @@ public class Lavanderia implements ILavanderia, Serializable{
         return prendas;
     }
 
-    public void setPrendas(List<Prenda> prendas) {
+    public void setPrendas(LinkedList<Prenda> prendas) {
         this.prendas = prendas;
     }
 
@@ -140,7 +138,6 @@ public class Lavanderia implements ILavanderia, Serializable{
         pw.println( " - DATOS DE RECEPCION - " );
         pw.println( "Fecha de recepcion: " + recepcion );
         pw.println( "Fecha de entrega: " + entrega );
-        pw.println( "Estado: "  );
         pw.close();
     }
     
