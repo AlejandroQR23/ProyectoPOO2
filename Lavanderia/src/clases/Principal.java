@@ -41,7 +41,7 @@ public class Principal {
         /*      ASIGNANDO PRENDAS               */
         
         
-        sucursal = new Lavanderia( opcion, direccion, prendas);
+        sucursal = new Lavanderia( opcion, direccion );
         Login.login();
         
     } // Fin de Main

@@ -3,12 +3,13 @@ package clases;
 
 import java.io.Serializable;
 
-public class Prenda implements Serializable {
+public class Prenda {
     private String nombre;
     private float precio;
     private String color;
     
-    public Prenda(String nombre, float precio, String color) {
+    //sólo el mediador podrá crear una instancia de Prenda
+    Prenda(String nombre, float precio, String color) {
         this.nombre = nombre;
         this.precio = precio;
         this.color = color;

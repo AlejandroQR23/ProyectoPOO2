@@ -6,7 +6,6 @@ import logica.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-
 public class Login extends javax.swing.JFrame implements Runnable {
     List<Cliente> clientes;
     int hora, minutos, segundos;  

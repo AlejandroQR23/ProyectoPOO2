@@ -146,6 +146,11 @@ public class Recepcion extends javax.swing.JFrame {
                 btnAceptarMouseClicked(evt);
             }
         });
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout panel3Layout = new org.jdesktop.layout.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -201,6 +206,11 @@ public class Recepcion extends javax.swing.JFrame {
         btnRecibir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
         btnRecibir.setForeground(new java.awt.Color(255, 255, 255));
         btnRecibir.setText("Recibir");
+        btnRecibir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecibirActionPerformed(evt);
+            }
+        });
 
         labelInformacion.setFont(new java.awt.Font("Microsoft YaHei Light", 2, 14)); // NOI18N
         labelInformacion.setText("Informacion");
@@ -297,6 +307,14 @@ public class Recepcion extends javax.swing.JFrame {
         log.setVisible( true );
         this.dispose();
     }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRecibirActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
      * @param args argumentos

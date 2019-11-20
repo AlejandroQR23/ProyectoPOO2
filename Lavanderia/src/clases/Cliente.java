@@ -8,11 +8,13 @@ public class Cliente implements Serializable {
     Lavanderia lavanderia;
 
     //atributos propios
-    String nombre; //nombre completo
-    String usuario;
-    String contrasena;
-    String direccion; //formato calle-numero-colonia
-    String telefono;
+    private String nombre; //nombre completo
+    private String usuario;
+    private String contrasena;
+    private String direccion;
+    private String telefono;
+    
+    private float total; //total a pagar
 
     public Cliente(String nombre, String usuario, String contrasena, String direccion, String telefono) {
         this.nombre = nombre;
@@ -42,6 +44,19 @@ public class Cliente implements Serializable {
     }
     
     /**
+     * Añade una prenda a la lista de prendas seleccionadas
+     * en la lavandería para su posterior impresión en
+     * la nota. El precio se le suma al total a pagar
+     * @param nombre
+     * @param color
+     * @param precio 
+     */
+    public void seleccionarPrenda( String nombre, String color, float precio ){
+        total += precio;
+        lavanderia.agregarPrenda( nombre, color, precio );
+    }
+    
+    /**
      * A partir del nombre de la nota introducido
      * por el usuario, se hace entrega de la ropa
      * al cliente que lo solicita
@@ -67,6 +82,10 @@ public class Cliente implements Serializable {
     public String getUsuario() {
         return usuario;
     }
+    
+    public float getTotal(){
+        return total;
+    }
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
@@ -79,7 +98,6 @@ public class Cliente implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    
     
 
 }

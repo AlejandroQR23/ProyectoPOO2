@@ -6,10 +6,6 @@ import java.io.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author ASUS
- */
 public class cCliente {
     public static void GuardarLista( List<Cliente> lista ){
         ObjectOutputStream ArchObjeto;

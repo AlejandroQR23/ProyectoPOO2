@@ -14,8 +14,7 @@ interface ILavanderia {
     public void mostrarNotas();
     public void entregarRopa( String nota );
     public void registrarCliente( Cliente cliente );
-    
-    //void agregarPrendas();
+    public void agregarPrenda( String nombre, String color, float precio );
 }
 
 /**
@@ -26,22 +25,23 @@ public class Lavanderia implements ILavanderia, Serializable{
     //Instrancias de colaboradores
     Cliente cliente;
     Nota nota;
+    private LinkedList<Prenda> prendas;
 
     //Atributos propios de la sucursal
     private String sucursal;
     private String direccion;
-    private LinkedList<Prenda> prendas;
     private float ganancias;
 
     //Carpeta de archivos
     File carpeta = new File( "Notas/");
 
-    public Lavanderia( String sucursal, String direccion, LinkedList prendas ){
+    public Lavanderia( String sucursal, String direccion ){
         this.carpeta.mkdir();
         setSucursal( sucursal );
         setDireccion( direccion );
-        setPrendas( prendas );
         ganancias = 0;
+        
+        this.prendas = new LinkedList<>();
     }
 
     //Getters y Setters
@@ -135,6 +135,13 @@ public class Lavanderia implements ILavanderia, Serializable{
         pw.println( " - CLIENTE: - ");
         pw.println( " Nombre: " + this.cliente.getNombre() + " Telefono: " + this.cliente.getTelefono() );
         pw.println( " Direccion de facturacion: " + this.cliente.getDireccion() );
+        
+        pw.println("\n - PRENDAS - ");
+        for( Prenda p : prendas ){
+            pw.println(" Prenda: " + p.getNombre() + " Color: " + p.getColor() + " ---> $" + p.getPrecio() );
+        }
+        pw.println(" TOTAL: " + this.cliente.getTotal() );
+        
         pw.println( " - DATOS DE RECEPCION - " );
         pw.println( "Fecha de recepcion: " + recepcion );
         pw.println( "Fecha de entrega: " + entrega );
@@ -152,6 +159,20 @@ public class Lavanderia implements ILavanderia, Serializable{
         for ( File fichero : ficheros ) {
             System.out.println( fichero.getName() );
         }
+    }
+    
+    /**
+     * Agrega una prenda seleccionada por el usuario
+     * a la lista de prendas para mostrarse en la 
+     * nota del servicio
+     * @param nombre
+     * @param color
+     * @param precio 
+     */
+    @Override
+    public void agregarPrenda( String nombre, String color, float precio ){
+        prendas.add( new Prenda(nombre, precio, color) );
+        this.ganancias += precio;
     }
 
     /**
