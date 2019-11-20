@@ -39,7 +39,7 @@ public class Lavanderia implements ILavanderia, Serializable{
         this.carpeta.mkdir();
         setSucursal( sucursal );
         setDireccion( direccion );
-        ganancias = 0;
+        ganancias = this.ganancias = calcularGanancias();
         
         this.prendas = new LinkedList<>();
     }
@@ -179,13 +179,55 @@ public class Lavanderia implements ILavanderia, Serializable{
      * Hace "entrega" de la ropa al cliente
      * para ello pide el numero de la nota y
      * elimina el archivo asociado a este nombre
+     * luego suma las ganancias relativas de esta
+     * entrega al archivo de ganancias totales
      * @param nota 
      */
     @Override
     public void entregarRopa( String nota ){
+        sumarGanancias();
         System.out.println( " - Su ropa ha sido entregeda - " );
         File f = new File( carpeta, nota+".txt" );
         f.delete();
+    }
+    
+    /**
+     * Este método calcula las ganancias totales de la
+     * lavandería a partir de un archivo de texto que contiene
+     * solo el número en flotante correspondiente al dinero
+     * ganado
+     * @return 
+     */
+    public float calcularGanancias(){
+        String gan = null;
+        try{
+            BufferedReader br = new BufferedReader( new FileReader( "ganIn.txt" ) );
+            gan = br.readLine();
+        } catch( IOException e ) {
+            System.out.println();
+        }
+
+        if( gan != null ){
+            return Float.parseFloat( gan );
+        } else {
+            return 0.0f;
+        }
+    }
+
+    /**
+     * Al completar un servicio suma las ganancias relativas de 
+     * éste a las ganancias totales al modificar el contenido del
+     * archivo de texto de ganancias
+     */
+    public void sumarGanancias(){
+        try{
+            File f = new File( "ganIn.txt" );
+            PrintWriter pw = new PrintWriter( new FileWriter( f, false ) );
+            pw.print( this.ganancias );
+            pw.close();
+        } catch( IOException e ){
+            System.out.println();
+        }
     }
 
 }
