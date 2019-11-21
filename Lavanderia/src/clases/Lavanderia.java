@@ -107,7 +107,7 @@ public class Lavanderia implements ILavanderia, Serializable{
      * Cuando un cliente inicia sesión
      * se registra su instancia en la 
      * clase mediadora (la lavandería)
-     * @param cliente 
+     * @param cliente es un cliente
      */
     @Override
     public void registrarCliente( Cliente cliente ){
@@ -120,10 +120,10 @@ public class Lavanderia implements ILavanderia, Serializable{
      * entregadas en el servicio y el costo total
      * en un archivo de texto con el nombre del numero
      * de nota
-     * @param recepcion
-     * @param entrega
-     * @param numero
-     * @throws IOException 
+     * @param recepcion es una Date
+     * @param entrega es un Date
+     * @param numero es un String
+     * @throws IOException es una excepcion de E/S en archivos
      */
     @Override
     public void generarNota( Date recepcion, Date entrega, String numero ) throws IOException{
@@ -157,7 +157,7 @@ public class Lavanderia implements ILavanderia, Serializable{
      * Lee los ficheros dentro de la carpeta de notas
      * añade el nombre de cada uno de estos a un arreglo
      * de cadenas que servirá para mostrarlo en la interfaz
-     * @return 
+     * @return un arreglo notas
      */
     @Override
     public String[] mostrarNotas(){
@@ -174,9 +174,9 @@ public class Lavanderia implements ILavanderia, Serializable{
      * Agrega una prenda seleccionada por el usuario
      * a la lista de prendas para mostrarse en la 
      * nota del servicio
-     * @param nombre
-     * @param color
-     * @param precio 
+     * @param nombre es un String
+     * @param color es un String
+     * @param precio es un float
      */
     @Override
     public void agregarPrenda( String nombre, String color, float precio ){
@@ -190,7 +190,7 @@ public class Lavanderia implements ILavanderia, Serializable{
      * elimina el archivo asociado a este nombre
      * luego suma las ganancias relativas de esta
      * entrega al archivo de ganancias totales
-     * @param nota 
+     * @param nota es un String
      */
     @Override
     public void entregarRopa( String nota ){

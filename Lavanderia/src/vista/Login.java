@@ -209,7 +209,6 @@ public class Login extends javax.swing.JFrame implements Runnable {
 
     /**
      * Metodo principal del formulario
-     * @param args argumentos
      */
     public static void login() {
         /*

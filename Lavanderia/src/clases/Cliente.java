@@ -27,7 +27,7 @@ public class Cliente implements Serializable {
     /**
      * Asocia un cliente cuya sesión ha
      * sido iniciada a la lavandería
-     * @param lavanderia 
+     * @param lavanderia es una lavanderia
      */
     public void iniciarSesion( Lavanderia lavanderia ){
         this.lavanderia = lavanderia;
@@ -48,9 +48,9 @@ public class Cliente implements Serializable {
      * Añade una prenda a la lista de prendas seleccionadas
      * en la lavandería para su posterior impresión en
      * la nota. El precio se le suma al total a pagar
-     * @param nombre
-     * @param color
-     * @param precio 
+     * @param nombre es String
+     * @param color es String
+     * @param precio es Float
      */
     public void seleccionarPrenda( String nombre, String color, float precio ){
         total += precio;
@@ -61,7 +61,7 @@ public class Cliente implements Serializable {
      * A partir del nombre de la nota introducido
      * por el usuario, se hace entrega de la ropa
      * al cliente que lo solicita
-     * @param nota 
+     * @param nota es String
      */
     public void recibirRopa( String nota ){
         lavanderia.entregarRopa( nota );

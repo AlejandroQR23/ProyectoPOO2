@@ -441,7 +441,6 @@ public class Recepcion extends javax.swing.JFrame {
 
     /**
      * Metodo principal de Recepcion (Sucursal)
-     * @param args argumentos
      */
     public static void Sucursal( ) {
         /* Muestra ventana estilo NIMBUS (Java SE 6)
