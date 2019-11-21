@@ -17,8 +17,10 @@ public class Recepcion extends javax.swing.JFrame {
     public Recepcion() { 
         initComponents();
         setLocationRelativeTo(null);
-        PropiedadesTablaServicios();    /*  <br> Direccion:"+Principal.sucursal.getDireccion()+"    */
-        labelInformacion.setText("<html><body>Sucursal: "+Principal.opcion+"</body></html>");
+        PropiedadesTablaServicios();
+        labelInformacion.setText("Bienvenido " + Principal.sucursal.getCliente().getNombre());
+        labelInformacion1.setText("Sucursal " + Principal.opcion);
+        labelInformacion2.setText("Info. Tel. 1234567");
     }
 
     private void PropiedadesTablaServicios(){
@@ -75,7 +77,10 @@ public class Recepcion extends javax.swing.JFrame {
         fieldNumeroNota = new javax.swing.JTextField();
         btnRecibir = new javax.swing.JButton();
         labelInformacion = new javax.swing.JLabel();
+        labelInformacion1 = new javax.swing.JLabel();
+        labelInformacion2 = new javax.swing.JLabel();
         labelLogo = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Recepcion");
@@ -251,6 +256,14 @@ public class Recepcion extends javax.swing.JFrame {
         labelInformacion.setText("Informacion");
         labelInformacion.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        labelInformacion1.setFont(new java.awt.Font("Microsoft YaHei Light", 2, 14)); // NOI18N
+        labelInformacion1.setText("Informacion");
+        labelInformacion1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        labelInformacion2.setFont(new java.awt.Font("Microsoft YaHei Light", 2, 14)); // NOI18N
+        labelInformacion2.setText("Informacion");
+        labelInformacion2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
         org.jdesktop.layout.GroupLayout panel4Layout = new org.jdesktop.layout.GroupLayout(panel4);
         panel4.setLayout(panel4Layout);
         panel4Layout.setHorizontalGroup(
@@ -268,7 +281,13 @@ public class Recepcion extends javax.swing.JFrame {
                         .add(labelNumeroNota))
                     .add(panel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(labelInformacion1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(labelInformacion2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel4Layout.setVerticalGroup(
@@ -280,12 +299,25 @@ public class Recepcion extends javax.swing.JFrame {
                 .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(btnRecibir)
-                .add(53, 53, 53)
-                .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 74, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .add(59, 59, 59)
+                .add(labelInformacion)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(labelInformacion1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(labelInformacion2)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Logo.png"))); // NOI18N
+
+        btnCerrarSesion.setBackground(new java.awt.Color(255, 51, 0));
+        btnCerrarSesion.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseClicked(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout panelLayout = new org.jdesktop.layout.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -300,7 +332,9 @@ public class Recepcion extends javax.swing.JFrame {
                         .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(panelLayout.createSequentialGroup()
                         .add(41, 41, 41)
-                        .add(labelLogo)))
+                        .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(btnCerrarSesion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(labelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .add(18, 18, 18)
                 .add(panel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -308,11 +342,16 @@ public class Recepcion extends javax.swing.JFrame {
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLayout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(panelLayout.createSequentialGroup()
+                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(panelLayout.createSequentialGroup()
+                        .add(45, 45, 45)
+                        .add(btnCerrarSesion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 33, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(labelLogo)
                         .add(18, 18, 18)
                         .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -367,11 +406,10 @@ public class Recepcion extends javax.swing.JFrame {
         /*   Si ingreso el color   */
         if (colorPrenda != null){
             btnGenerar.setEnabled(true);
+            Cliente c = Principal.sucursal.getCliente();
+            float precio = Float.parseFloat( Principal.precios.get( prendaSeleccionada ) );
+            c.seleccionarPrenda( prendaSeleccionada, colorPrenda, precio );
         }
-        
-        Cliente c = Principal.sucursal.getCliente();
-        float precio = Float.parseFloat( Principal.precios.get( prendaSeleccionada ) );
-        c.seleccionarPrenda( prendaSeleccionada, colorPrenda, precio );
         
     }//GEN-LAST:event_btnAgregarCarritoActionPerformed
 
@@ -382,6 +420,12 @@ public class Recepcion extends javax.swing.JFrame {
     private void fieldNumeroNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNumeroNotaActionPerformed
         btnRecibir.setEnabled( true );
     }//GEN-LAST:event_fieldNumeroNotaActionPerformed
+
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
+        Login log = new Login();
+        log.setVisible( true );
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     /**
      * @param args argumentos
@@ -421,6 +465,7 @@ public class Recepcion extends javax.swing.JFrame {
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JTable Tabla;
     private javax.swing.JButton btnAgregarCarrito;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnRecibir;
     private javax.swing.JTextField fieldNumeroNota;
@@ -428,6 +473,8 @@ public class Recepcion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelGenerarNota;
     private javax.swing.JLabel labelInformacion;
+    private javax.swing.JLabel labelInformacion1;
+    private javax.swing.JLabel labelInformacion2;
     private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel labelNumeroNota;
     private javax.swing.JList<String> listaPedido;

@@ -54,18 +54,18 @@ public class Login extends javax.swing.JFrame implements Runnable {
         btnLogin.setBackground(new java.awt.Color(255, 102, 51));
         btnLogin.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnLogin.setText("Iniciar Sesión");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
             }
         });
 
         btnRegistro.setBackground(new java.awt.Color(255, 102, 51));
         btnRegistro.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnRegistro.setText("Registrar");
-        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistroActionPerformed(evt);
+        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegistroMouseClicked(evt);
             }
         });
 
@@ -150,7 +150,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         // Lectura de campos (fields)
         String usuario = fieldUsuario.getText();
         char[] contrasenaChar = fieldContrasena.getPassword();
@@ -192,13 +192,13 @@ public class Login extends javax.swing.JFrame implements Runnable {
             }
         }
 	JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnLoginMouseClicked
 
-    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
         Registro reg = new Registro();
         reg.setVisible( true );
         this.dispose();
-    }//GEN-LAST:event_btnRegistroActionPerformed
+    }//GEN-LAST:event_btnRegistroMouseClicked
 
     public static void login() {
         /*

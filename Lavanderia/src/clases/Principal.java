@@ -1,6 +1,5 @@
 package clases;
 // Importa login de principal
-import java.io.*; // Archivos
 import java.util.*; // Fechas
 import vista.Login; // Login
 import javax.swing.JOptionPane; // Menu emergente
@@ -42,14 +41,6 @@ public class Principal {
                 precios.put("Chamarra", "65");
                 break;
         }
-        
-        /*       ASIGNANDO PRENDAS
-        LinkedList<Prenda> prendas = new LinkedList<>();
-        Prenda prenda1 = new Prenda("Saco", 50.0f, "Negro");Prenda prenda2 = new Prenda("Pantalon", 100.0f, "Negro");
-        Prenda prenda3 = new Prenda("Abrigo", 50.0f, "Negro");Prenda prenda4 = new Prenda("Camisa", 100.0f, "Negro");
-        Prenda prenda5 = new Prenda("Playera", 80.0f, "Negro");
-        prendas.add(prenda1);prendas.add(prenda2);prendas.add(prenda3);prendas.add(prenda4);prendas.add(prenda5);
-        ASIGNANDO PRENDAS               */
         
         sucursal = new Lavanderia( opcion, direccion );
         Login.login();
