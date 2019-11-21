@@ -11,7 +11,7 @@ interface ILavanderia {
     public void generarNota( Date recepcion, Date entrega, String numero ) throws IOException;
     
     //Cliente
-    public void mostrarNotas();
+    public String[] mostrarNotas();
     public void entregarRopa( String nota );
     public void registrarCliente( Cliente cliente );
     public void agregarPrenda( String nombre, String color, float precio );
@@ -39,7 +39,7 @@ public class Lavanderia implements ILavanderia, Serializable{
         this.carpeta.mkdir();
         setSucursal( sucursal );
         setDireccion( direccion );
-        ganancias = this.ganancias = calcularGanancias();
+        this.ganancias = calcularGanancias();
         
         this.prendas = new LinkedList<>();
     }
@@ -130,10 +130,14 @@ public class Lavanderia implements ILavanderia, Serializable{
         //creamos las instancias del archivo de notas
         File f = new File( this.carpeta, numero + ".txt" );
         PrintWriter pw = new PrintWriter( new FileWriter( f, true ) );
-
-        //escribrimos los datos en la nota
-        pw.println( " - CLIENTE: - ");
-        pw.println( " Nombre: " + this.cliente.getNombre() + " Telefono: " + this.cliente.getTelefono() );
+        
+        //escribimos los datos de la lavandería
+        pw.println("\t\t *** DRY CLEAN: SIX STARS *** ");
+        pw.println(" Sucursal: " + this.direccion );
+        
+        //escribrimos los datos del cliente en la nota
+        pw.println( "\n - CLIENTE: - ");
+        pw.println( " Nombre: " + this.cliente.getNombre() + "\n Telefono: " + this.cliente.getTelefono() );
         pw.println( " Direccion de facturacion: " + this.cliente.getDireccion() );
         
         pw.println("\n - PRENDAS - ");
@@ -142,23 +146,27 @@ public class Lavanderia implements ILavanderia, Serializable{
         }
         pw.println(" TOTAL: " + this.cliente.getTotal() );
         
-        pw.println( " - DATOS DE RECEPCION - " );
+        pw.println( "\n - DATOS DE RECEPCION - " );
         pw.println( "Fecha de recepcion: " + recepcion );
         pw.println( "Fecha de entrega: " + entrega );
         pw.close();
     }
     
     /**
-     * Este método muestra las notas pendientes
-     * es decir, imprime los nombre de todos los archivos
-     * de notas en la carpeta
+     * Lee los ficheros dentro de la carpeta de notas
+     * añade el nombre de cada uno de estos a un arreglo
+     * de cadenas que servirá para mostrarlo en la interfaz
+     * @return 
      */
     @Override
-    public void mostrarNotas(){
+    public String[] mostrarNotas(){
         File[] ficheros = carpeta.listFiles();
-        for ( File fichero : ficheros ) {
-            System.out.println( fichero.getName() );
+        String[] nombres = new String[ ficheros.length ];
+        for ( int i = 0; i < ficheros.length; i++ ) {
+            nombres[i] = ficheros[i].getName();
         }
+        
+        return nombres;
     }
     
     /**

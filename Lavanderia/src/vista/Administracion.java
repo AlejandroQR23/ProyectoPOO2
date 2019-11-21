@@ -22,6 +22,8 @@ public class Administracion extends javax.swing.JFrame {
         initComponents();
         PropiedadesTablaUsuarios();
         setLocationRelativeTo(null);
+        
+        labelGanancias.setText("Ganancias: $" + Principal.sucursal.getGanancias() );
     }
 
     private void PropiedadesTablaUsuarios(){
@@ -60,7 +62,7 @@ public class Administracion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
         panel2 = new javax.swing.JPanel();
-        labelAcoxpa = new javax.swing.JLabel();
+        labelGanancias = new javax.swing.JLabel();
         panel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -122,8 +124,8 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        labelAcoxpa.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
-        labelAcoxpa.setText("Ganancias Totales: $0.00");
+        labelGanancias.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
+        labelGanancias.setText("Ganancias Totales: $0.00");
 
         org.jdesktop.layout.GroupLayout panel2Layout = new org.jdesktop.layout.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
@@ -131,14 +133,14 @@ public class Administracion extends javax.swing.JFrame {
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(labelAcoxpa, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 190, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(labelGanancias, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 190, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(labelAcoxpa)
+                .add(labelGanancias)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -276,7 +278,7 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labelAcoxpa;
+    private javax.swing.JLabel labelGanancias;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;

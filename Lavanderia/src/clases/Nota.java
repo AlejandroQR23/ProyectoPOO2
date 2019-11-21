@@ -12,10 +12,11 @@ public class Nota{
     //Instancia del mediador
     Lavanderia lavanderia;
 
-    public Nota( Lavanderia lavanderia ){
+    public Nota( Lavanderia lavanderia, String num_nota ){
         //generamos las fechas
         this.fecha_recepcion = new Date();
         this.fecha_entrega = calcularEntrega( this.fecha_recepcion );
+        this.num_nota = num_nota;
 
         //asociamos el mediador
         this.lavanderia = lavanderia;

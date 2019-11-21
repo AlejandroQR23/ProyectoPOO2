@@ -79,7 +79,6 @@ public class Recepcion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Recepcion");
-        setAlwaysOnTop(true);
         setResizable(false);
 
         panel.setBackground(new java.awt.Color(0, 153, 153));
@@ -231,6 +230,11 @@ public class Recepcion extends javax.swing.JFrame {
         labelNumeroNota.setText("Ingrese # Nota:");
 
         fieldNumeroNota.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
+        fieldNumeroNota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldNumeroNotaActionPerformed(evt);
+            }
+        });
 
         btnRecibir.setBackground(new java.awt.Color(0, 102, 102));
         btnRecibir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
@@ -331,11 +335,29 @@ public class Recepcion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
-        //
+        Cliente c = Principal.sucursal.getCliente();
+        String nota = fieldNumeroNota.getText();
+        c.recibirRopa( nota );
     }//GEN-LAST:event_btnRecibirActionPerformed
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        //
+        Cliente c = Principal.sucursal.getCliente();
+        String cad = c.getUsuario(); 
+        String nombre_nota = "";
+        int user = 0;
+        for( int i = 0; i < cad.length(); i++ ){
+            user += (int) cad.codePointAt(i);
+        }
+        int num = (int) (Math.random() * 20 + 1);
+        nombre_nota += user + Integer.toString( num );
+        
+        Nota nota = new Nota( Principal.sucursal, nombre_nota );
+        try{
+            nota.crearNota();
+        } catch( IOException e ){
+            JOptionPane.showMessageDialog(null, "Número de nota incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
@@ -343,15 +365,23 @@ public class Recepcion extends javax.swing.JFrame {
         colorPrenda = JOptionPane.showInputDialog("Ingresa el color de "+prendaSeleccionada+":");
         
         /*   Si ingreso el color   */
-        if (colorPrenda!= null){
+        if (colorPrenda != null){
             btnGenerar.setEnabled(true);
         }
+        
+        Cliente c = Principal.sucursal.getCliente();
+        float precio = Float.parseFloat( Principal.precios.get( prendaSeleccionada ) );
+        c.seleccionarPrenda( prendaSeleccionada, colorPrenda, precio );
         
     }//GEN-LAST:event_btnAgregarCarritoActionPerformed
 
     private void listaPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPedidoMouseClicked
         btnAgregarCarrito.setEnabled(true);
     }//GEN-LAST:event_listaPedidoMouseClicked
+
+    private void fieldNumeroNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNumeroNotaActionPerformed
+        btnRecibir.setEnabled( true );
+    }//GEN-LAST:event_fieldNumeroNotaActionPerformed
 
     /**
      * @param args argumentos
