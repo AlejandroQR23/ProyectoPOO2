@@ -2,7 +2,6 @@ package vista;
 
 import clases.*; // Clases
 import java.io.*;
-import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -18,7 +17,9 @@ public class Recepcion extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         PropiedadesTablaServicios();
-        labelInformacion.setText("Bienvenido " + Principal.sucursal.getCliente().getNombre());
+        
+        /*   Detalles esteticos   */
+        labelInformacion.setText("___ BIEVENIDO ___");
         labelInformacion1.setText("Sucursal " + Principal.opcion);
         labelInformacion2.setText("Info. Tel. 1234567");
     }

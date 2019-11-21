@@ -2,7 +2,6 @@
 package vista;
 
 import clases.Cliente;
-import clases.Principal;
 import logica.*;
 import java.io.*;
 import java.util.*;

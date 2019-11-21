@@ -175,18 +175,17 @@ public class Login extends javax.swing.JFrame implements Runnable {
             String usuarioActual = i.getUsuario();
             String contrasenaActual = i.getContrasena();
             
-            // Administrador unico
-            if(usuario.equals("admin") && contrasena.equals("admin")){
-                Administracion adm = new Administracion();
-                adm.setVisible( true );
-                i.iniciarSesion(Principal.sucursal);
-                this.dispose();
-                return;
-            }
             if( usuarioActual.equals(usuario) && contrasenaActual.equals(contrasena)){
+                i.iniciarSesion(Principal.sucursal);
+                if(usuarioActual.equals("admin")){
+                    Administracion adm = new Administracion();
+                    adm.setVisible( true );
+                    i.iniciarSesion(Principal.sucursal);
+                    this.dispose();
+                    return;
+                }
                 Recepcion rec = new Recepcion();
                 rec.setVisible( true );
-                i.iniciarSesion(Principal.sucursal);
                 this.dispose();
                 return;
             }

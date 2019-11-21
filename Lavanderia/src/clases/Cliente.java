@@ -38,9 +38,10 @@ public class Cliente implements Serializable {
      * Para el usuario administrador:
      * muestra todas las notas no entregadas 
      * de la lavandería
+     * @return arreglo de notas
      */
-    public void verNotas(){
-        lavanderia.mostrarNotas();
+    public String[] verNotas(){
+        return lavanderia.mostrarNotas();
     }
     
     /**

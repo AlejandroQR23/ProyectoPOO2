@@ -21,6 +21,7 @@ public class Administracion extends javax.swing.JFrame {
     public Administracion() {
         initComponents();
         PropiedadesTablaUsuarios();
+        PropiedadesTablaNotas();
         setLocationRelativeTo(null);
         
         labelGanancias.setText("Ganancias: $" + Principal.sucursal.getGanancias() );
@@ -47,6 +48,23 @@ public class Administracion extends javax.swing.JFrame {
         tablaUsuarios.setModel(dtm);
     }
     
+    private void PropiedadesTablaNotas(){
+        String titulo[] = {"Notas"};
+        /*   Muestra las Notas en la tabla de Notas   */
+        Cliente c = Principal.sucursal.getCliente();
+        String[] notas = c.verNotas();
+        //String[] notas = {"Prueba.txt"};
+        DefaultTableModel dtm = new DefaultTableModel(null, titulo){
+            @Override
+            public boolean isCellEditable(int filas, int columnas) {
+                return (columnas == notas.length);
+            }
+        };
+        
+        dtm.addRow(notas);
+        tablaNotas.setModel(dtm);
+    }
+    
     
     
     /** 
@@ -65,8 +83,8 @@ public class Administracion extends javax.swing.JFrame {
         labelGanancias = new javax.swing.JLabel();
         panel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        areaNotas = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaNotas = new javax.swing.JTable();
         btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,7 +152,7 @@ public class Administracion extends javax.swing.JFrame {
             .add(panel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(labelGanancias, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 190, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -147,9 +165,27 @@ public class Administracion extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
         jLabel5.setText("Notas");
 
-        areaNotas.setColumns(20);
-        areaNotas.setRows(5);
-        jScrollPane2.setViewportView(areaNotas);
+        tablaNotas.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        tablaNotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Notas.txt"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tablaNotas);
 
         org.jdesktop.layout.GroupLayout panel3Layout = new org.jdesktop.layout.GroupLayout(panel3);
         panel3.setLayout(panel3Layout);
@@ -160,8 +196,8 @@ public class Administracion extends javax.swing.JFrame {
                 .add(jLabel5)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panel3Layout.createSequentialGroup()
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 211, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panel3Layout.setVerticalGroup(
@@ -169,7 +205,7 @@ public class Administracion extends javax.swing.JFrame {
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panel3Layout.createSequentialGroup()
                 .add(jLabel5)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -220,9 +256,7 @@ public class Administracion extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(panelFondo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(panelFondo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -272,17 +306,17 @@ public class Administracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea areaNotas;
     private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelGanancias;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panelFondo;
+    private javax.swing.JTable tablaNotas;
     private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 
