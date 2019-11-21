@@ -1,5 +1,6 @@
 package vista;
 
+import logica.Principal;
 import clases.*; // Clases
 import java.io.*;
 import javax.swing.JOptionPane;

@@ -2,7 +2,7 @@ package vista;
 
 import logica.TextPrompt;
 import clases.Cliente;
-import clases.Principal;
+import logica.Principal;
 import logica.*;
 import java.util.*;
 import javax.swing.JOptionPane;

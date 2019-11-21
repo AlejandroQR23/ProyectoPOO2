@@ -1,5 +1,6 @@
-package clases;
+package logica;
 // Importa login de principal
+import clases.Lavanderia;
 import java.util.*; // Fechas
 import vista.Login; // Login
 import javax.swing.JOptionPane; // Menu emergente

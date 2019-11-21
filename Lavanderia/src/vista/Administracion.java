@@ -4,6 +4,7 @@
 
 package vista;
 
+import logica.Principal;
 import clases.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
