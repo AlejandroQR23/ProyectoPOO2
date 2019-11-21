@@ -1,7 +1,3 @@
-/*
-
- */
-
 package vista;
 
 import logica.Principal;
@@ -11,14 +7,16 @@ import javax.swing.table.DefaultTableModel;
 import logica.cCliente;
 
 /**
- *
- * @author ASUS
+ *  Clase Administración que hereda de Formularios Swing
+ * @author Equipo 14
  */
 public class Administracion extends javax.swing.JFrame {
 
     List<Cliente> clientes;
     
-    /** Crea nuevo formulario Administracion */
+    /**
+    * Constructor del formulario Administracion
+    */
     public Administracion() {
         initComponents();
         PropiedadesTablaUsuarios();
@@ -27,7 +25,10 @@ public class Administracion extends javax.swing.JFrame {
         
         labelGanancias.setText("Ganancias: $" + Principal.sucursal.getGanancias() );
     }
-
+    
+    /**
+    *  Propiedades de la Tabla Usuarios
+    */
     private void PropiedadesTablaUsuarios(){
         String titulo[] = {"Nombre", "Telefono","Direccion"};
         /*   Mostrar los datos de los clientes en la tabla de Usuarios   */
@@ -49,6 +50,9 @@ public class Administracion extends javax.swing.JFrame {
         tablaUsuarios.setModel(dtm);
     }
     
+    /**
+    *  Propiedades de la Tabla Notas
+    */
     private void PropiedadesTablaNotas(){
         String titulo[] = {"Notas"};
         /*   Muestra las Notas en la tabla de Notas   */
@@ -274,9 +278,10 @@ public class Administracion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     /**
+     * Metodo principal del formulario
      * @param args argumentos
      */
-    public static void main(String args[]) {
+    public static void Administracion(String args[]) {
         /* Muestra ventana estilo NIMBUS (Java SE 6)
          * Para mas detalles see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */

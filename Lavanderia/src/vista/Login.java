@@ -7,11 +7,18 @@ import logica.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
+/**
+ * Clase Login hereda de Formularios SWING
+ * @author Equipo 14
+ */
 public class Login extends javax.swing.JFrame implements Runnable {
     List<Cliente> clientes;
     int hora, minutos, segundos;  
     Thread h1;
     
+    /**
+     * Constructor del Formulario Login
+     */
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -200,6 +207,10 @@ public class Login extends javax.swing.JFrame implements Runnable {
         this.dispose();
     }//GEN-LAST:event_btnRegistroMouseClicked
 
+    /**
+     * Metodo principal del formulario
+     * @param args argumentos
+     */
     public static void login() {
         /*
         * Inicia la ventana con un estilo preestablecido
@@ -268,7 +279,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // Manejar excepcion ?
+                JOptionPane.showMessageDialog(null, "E/S en Login", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

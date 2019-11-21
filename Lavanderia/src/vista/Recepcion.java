@@ -5,15 +5,19 @@ import clases.*; // Clases
 import java.io.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
- * 
+ * Clase Recepcion hereda de Formularios SWING
+ * @author Equipo 14
  */
 public class Recepcion extends javax.swing.JFrame {
     
     String prendaSeleccionada;
     String colorPrenda;
 
-    /** Crea nuevo formulario Sucursal */
+    /**
+     * Constructor de Recepcion
+     */
     public Recepcion() { 
         initComponents();
         setLocationRelativeTo(null);
@@ -25,6 +29,9 @@ public class Recepcion extends javax.swing.JFrame {
         labelInformacion2.setText("Info. Tel. 1234567");
     }
 
+    /**
+    *  Propiedades de la Tabla Servicios de la Sucursal
+    */
     private void PropiedadesTablaServicios(){
         String titulo[] = {"  Prendas", "  Precio $"};
         /*   Mostrar los datos de la Sucursal en la tabla de Servicios   */
@@ -433,9 +440,10 @@ public class Recepcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     /**
+     * Metodo principal de Recepcion (Sucursal)
      * @param args argumentos
      */
-    public static void Sucursal( /* TIPO DE SUCURSAL */ ) {
+    public static void Sucursal( ) {
         /* Muestra ventana estilo NIMBUS (Java SE 6)
          * Para mas detalles see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */

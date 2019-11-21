@@ -194,10 +194,15 @@ public class Lavanderia implements ILavanderia, Serializable{
      */
     @Override
     public void entregarRopa( String nota ){
-        sumarGanancias();
-        JOptionPane.showMessageDialog(null, " - Su ropa ha sido entregada - ");
         File f = new File( carpeta, nota+".txt" );
-        f.delete();
+        if( f.exists() == true ){
+            sumarGanancias();
+            JOptionPane.showMessageDialog(null, " - Su ropa ha sido entregada - ");
+            f.delete();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Numero de nota incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     /**
@@ -205,7 +210,7 @@ public class Lavanderia implements ILavanderia, Serializable{
      * lavandería a partir de un archivo de texto que contiene
      * solo el número en flotante correspondiente al dinero
      * ganado
-     * @return 
+     * @return Las ganancias en float
      */
     public float calcularGanancias(){
         String gan = null;
