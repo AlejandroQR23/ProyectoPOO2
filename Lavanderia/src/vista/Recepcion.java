@@ -236,6 +236,7 @@ public class Recepcion extends javax.swing.JFrame {
         labelNumeroNota.setText("Ingrese # Nota:");
 
         fieldNumeroNota.setFont(new java.awt.Font("Microsoft YaHei Light", 0, 18)); // NOI18N
+        fieldNumeroNota.setToolTipText("Enter para habilitar RECIBIR");
         fieldNumeroNota.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldNumeroNotaActionPerformed(evt);
@@ -394,6 +395,7 @@ public class Recepcion extends javax.swing.JFrame {
         Nota nota = new Nota( Principal.sucursal, nombre_nota );
         try{
             nota.crearNota();
+            JOptionPane.showMessageDialog(null, "Pedido realizado Nota #"+nombre_nota);
         } catch( IOException e ){
             JOptionPane.showMessageDialog(null, "Número de nota incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -410,6 +412,7 @@ public class Recepcion extends javax.swing.JFrame {
             Cliente c = Principal.sucursal.getCliente();
             float precio = Float.parseFloat( Principal.precios.get( prendaSeleccionada ) );
             c.seleccionarPrenda( prendaSeleccionada, colorPrenda, precio );
+            JOptionPane.showMessageDialog(null, "Agregado al carrito :)");
         }
         
     }//GEN-LAST:event_btnAgregarCarritoActionPerformed

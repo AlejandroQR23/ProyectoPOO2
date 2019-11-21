@@ -1,5 +1,6 @@
 package vista;
 
+import logica.TextPrompt;
 import clases.Cliente;
 import clases.Principal;
 import logica.*;

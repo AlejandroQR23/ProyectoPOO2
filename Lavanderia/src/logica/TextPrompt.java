@@ -1,4 +1,4 @@
-package vista;
+package logica;
 /**
  * @author Monkeyelgrande
  * @see https://www.youtube.com/watch?v=PP-hBgaI8_A

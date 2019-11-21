@@ -1,6 +1,7 @@
 
 package vista;
 
+import logica.TextPrompt;
 import clases.Cliente;
 import logica.*;
 import java.io.*;

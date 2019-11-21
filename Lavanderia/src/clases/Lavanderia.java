@@ -2,6 +2,7 @@ package clases;
 
 import java.io.*; //para archivos
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
 * La interfaz mediadora
@@ -194,7 +195,7 @@ public class Lavanderia implements ILavanderia, Serializable{
     @Override
     public void entregarRopa( String nota ){
         sumarGanancias();
-        System.out.println( " - Su ropa ha sido entregeda - " );
+        JOptionPane.showMessageDialog(null, " - Su ropa ha sido entregada - ");
         File f = new File( carpeta, nota+".txt" );
         f.delete();
     }
@@ -212,7 +213,7 @@ public class Lavanderia implements ILavanderia, Serializable{
             BufferedReader br = new BufferedReader( new FileReader( "ganIn.txt" ) );
             gan = br.readLine();
         } catch( IOException e ) {
-            System.out.println();
+            JOptionPane.showMessageDialog(null, "E/S error Lavanderia", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         if( gan != null ){
@@ -234,7 +235,7 @@ public class Lavanderia implements ILavanderia, Serializable{
             pw.print( this.ganancias );
             pw.close();
         } catch( IOException e ){
-            System.out.println();
+            JOptionPane.showMessageDialog(null, "E/S error Lavanderia", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
