@@ -54,18 +54,18 @@ public class Login extends javax.swing.JFrame implements Runnable {
         btnLogin.setBackground(new java.awt.Color(255, 102, 51));
         btnLogin.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnLogin.setText("Iniciar Sesión");
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnLoginMouseClicked(evt);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
             }
         });
 
         btnRegistro.setBackground(new java.awt.Color(255, 102, 51));
         btnRegistro.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnRegistro.setText("Registrar");
-        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistroMouseClicked(evt);
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
             }
         });
 
@@ -93,7 +93,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(btnLogin)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelLayout.createSequentialGroup()
                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,13 +150,7 @@ public class Login extends javax.swing.JFrame implements Runnable {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
-        Registro reg = new Registro();
-        reg.setVisible( true );
-        this.dispose();
-    }//GEN-LAST:event_btnRegistroMouseClicked
-
-    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // Lectura de campos (fields)
         String usuario = fieldUsuario.getText();
         char[] contrasenaChar = fieldContrasena.getPassword();
@@ -185,20 +179,26 @@ public class Login extends javax.swing.JFrame implements Runnable {
             if(usuario.equals("admin") && contrasena.equals("admin")){
                 Administracion adm = new Administracion();
                 adm.setVisible( true );
-                //i.iniciarSesion(Principal.sucursal);
+                i.iniciarSesion(Principal.sucursal);
                 this.dispose();
                 return;
             }
             if( usuarioActual.equals(usuario) && contrasenaActual.equals(contrasena)){
                 Recepcion rec = new Recepcion();
                 rec.setVisible( true );
-                //i.iniciarSesion(Principal.sucursal);
+                i.iniciarSesion(Principal.sucursal);
                 this.dispose();
                 return;
             }
         }
 	JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_btnLoginMouseClicked
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        Registro reg = new Registro();
+        reg.setVisible( true );
+        this.dispose();
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     public static void login() {
         /*

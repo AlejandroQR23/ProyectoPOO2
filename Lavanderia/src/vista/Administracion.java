@@ -4,18 +4,49 @@
 
 package vista;
 
+import clases.*;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import logica.cCliente;
+
 /**
  *
  * @author ASUS
  */
 public class Administracion extends javax.swing.JFrame {
 
+    List<Cliente> clientes;
+    
     /** Crea nuevo formulario Administracion */
     public Administracion() {
         initComponents();
+        PropiedadesTablaUsuarios();
         setLocationRelativeTo(null);
     }
 
+    private void PropiedadesTablaUsuarios(){
+        String titulo[] = {"Nombre", "Telefono","Direccion"};
+        /*   Mostrar los datos de los clientes en la tabla de Usuarios   */
+        clientes = cCliente.AbrirLista();
+        int numClientes = clientes.size();
+        
+        DefaultTableModel dtm = new DefaultTableModel(null, titulo){
+            @Override
+            public boolean isCellEditable(int filas, int columnas) {
+                return (columnas == numClientes);
+            }
+        };
+        
+        for( Cliente i : clientes ){
+            String fila[] = {i.getNombre(), i.getTelefono(), i.getDireccion()};
+            dtm.addRow(fila);
+        }
+        
+        tablaUsuarios.setModel(dtm);
+    }
+    
+    
+    
     /** 
      * Inicializa el formulario
      */
@@ -25,9 +56,9 @@ public class Administracion extends javax.swing.JFrame {
 
         panelFondo = new javax.swing.JPanel();
         panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaUsuarios = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaUsuarios = new javax.swing.JTable();
         panel2 = new javax.swing.JPanel();
         labelAcoxpa = new javax.swing.JLabel();
         panel3 = new javax.swing.JPanel();
@@ -38,20 +69,35 @@ public class Administracion extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administracion");
+        setAlwaysOnTop(true);
 
         panelFondo.setBackground(new java.awt.Color(102, 153, 0));
 
-        listaUsuarios.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
-        listaUsuarios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Usuario1", "Usuario2", "Usuario3", "Usuario4" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        listaUsuarios.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(listaUsuarios);
-
         jLabel4.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 24)); // NOI18N
         jLabel4.setText("Usuarios");
+
+        tablaUsuarios.setAutoCreateRowSorter(true);
+        tablaUsuarios.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Telefono", "Direccion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         org.jdesktop.layout.GroupLayout panelLayout = new org.jdesktop.layout.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -59,10 +105,12 @@ public class Administracion extends javax.swing.JFrame {
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                    .add(jScrollPane1)
-                    .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLayout.createSequentialGroup()
+                .addContainerGap(152, Short.MAX_VALUE)
+                .add(jLabel4)
+                .add(146, 146, 146))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -70,8 +118,8 @@ public class Administracion extends javax.swing.JFrame {
                 .addContainerGap()
                 .add(jLabel4)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jScrollPane1)
-                .addContainerGap())
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 277, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         labelAcoxpa.setFont(new java.awt.Font("Microsoft YaHei", 1, 14)); // NOI18N
@@ -82,8 +130,8 @@ public class Administracion extends javax.swing.JFrame {
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel2Layout.createSequentialGroup()
-                .add(38, 38, 38)
-                .add(labelAcoxpa, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 305, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .add(labelAcoxpa, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 190, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
@@ -106,12 +154,12 @@ public class Administracion extends javax.swing.JFrame {
         panel3Layout.setHorizontalGroup(
             panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel3Layout.createSequentialGroup()
-                .add(152, 152, 152)
+                .add(77, 77, 77)
                 .add(jLabel5)
-                .addContainerGap(167, Short.MAX_VALUE))
-            .add(panel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jScrollPane2)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 211, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panel3Layout.setVerticalGroup(
@@ -138,18 +186,17 @@ public class Administracion extends javax.swing.JFrame {
             panelFondoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelFondoLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(panel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(18, 18, 18)
                 .add(panelFondoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panelFondoLayout.createSequentialGroup()
-                        .add(18, 18, 18)
-                        .add(panelFondoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(panelFondoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(panel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, panelFondoLayout.createSequentialGroup()
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .add(btnCerrarSesion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 132, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(18, 18, 18))))
+                        .add(58, 58, 58))))
         );
         panelFondoLayout.setVerticalGroup(
             panelFondoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -177,9 +224,7 @@ public class Administracion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(panelFondo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 0, Short.MAX_VALUE))
+            .add(panelFondo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -232,11 +277,11 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelAcoxpa;
-    private javax.swing.JList<String> listaUsuarios;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panelFondo;
+    private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 
 }

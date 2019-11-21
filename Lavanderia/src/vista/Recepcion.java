@@ -3,34 +3,34 @@ package vista;
 import clases.*; // Clases
 import java.io.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  * 
  */
 public class Recepcion extends javax.swing.JFrame {
+    
+    String prendaSeleccionada;
+    String colorPrenda;
 
     /** Crea nuevo formulario Sucursal */
     public Recepcion() { 
         initComponents();
         setLocationRelativeTo(null);
-        PropiedadesTablaServicios();
-        labelInformacion.setText("<html><body>Sucursal: "+Principal.opcion+"<br> Direccion:"+Principal.sucursal.getDireccion()+"</body></html>");
-        
-        /* IF SUCURSAL 1.ShowInfo LABELS */
-        /* IF SUCURSAL 2.ShowInfo LABELS */
-        /* IF SUCURSAL 3.ShowInfo LABELS */
+        PropiedadesTablaServicios();    /*  <br> Direccion:"+Principal.sucursal.getDireccion()+"    */
+        labelInformacion.setText("<html><body>Sucursal: "+Principal.opcion+"</body></html>");
     }
 
     private void PropiedadesTablaServicios(){
-        String titulo[] = {"Prendas", "Precio"};
-        List<Prenda> prendas = Principal.sucursal.getPrendas();
-        /*   Mostrar los datos de la Sucursal en la tabla de Recepcion   */
-        
-        String list1[] = {prendas.get(0).getNombre(), String.valueOf(prendas.get(0).getPrecio())};
-        String list2[] = {prendas.get(1).getNombre(), String.valueOf(prendas.get(1).getPrecio())};
-        String list3[] = {prendas.get(2).getNombre(), String.valueOf(prendas.get(2).getPrecio())};
-        String list4[] = {prendas.get(3).getNombre(), String.valueOf(prendas.get(3).getPrecio())};
-        String list5[] = {prendas.get(4).getNombre(), String.valueOf(prendas.get(4).getPrecio())};
+        String titulo[] = {"  Prendas", "  Precio $"};
+        /*   Mostrar los datos de la Sucursal en la tabla de Servicios   */
+        String list1[] = {"Saco", Principal.precios.get("Saco")};
+        String list2[] = {"Pantalon", Principal.precios.get("Pantalon")};
+        String list3[] = {"Abrigo", Principal.precios.get("Abrigo")};
+        String list4[] = {"Camisa", Principal.precios.get("Camisa")};
+        String list5[] = {"Playera", Principal.precios.get("Playera")};
+        String list6[] = {"Corbata", Principal.precios.get("Corbata")};
+        String list7[] = {"Chamarra", Principal.precios.get("Chamarra")};
         
         DefaultTableModel dtm = new DefaultTableModel(null, titulo){
             @Override
@@ -38,12 +38,13 @@ public class Recepcion extends javax.swing.JFrame {
                 return (columnas == 20);
             }
         };
-        
         dtm.addRow(list1);
         dtm.addRow(list2);
         dtm.addRow(list3);
         dtm.addRow(list4);
         dtm.addRow(list5);
+        dtm.addRow(list6);
+        dtm.addRow(list7);
         
         Tabla.setModel(dtm);
     }
@@ -62,19 +63,24 @@ public class Recepcion extends javax.swing.JFrame {
         panel2 = new javax.swing.JPanel();
         ScrollPane = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaPedido = new javax.swing.JList<>();
+        btnAgregarCarrito = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         panel3 = new javax.swing.JPanel();
-        labelAdquirir = new javax.swing.JLabel();
-        btnAceptar = new javax.swing.JButton();
-        panelLogo = new javax.swing.JPanel();
-        labelLogo = new javax.swing.JLabel();
+        labelGenerarNota = new javax.swing.JLabel();
+        btnGenerar = new javax.swing.JButton();
         panel4 = new javax.swing.JPanel();
         labelNumeroNota = new javax.swing.JLabel();
         fieldNumeroNota = new javax.swing.JTextField();
         btnRecibir = new javax.swing.JButton();
         labelInformacion = new javax.swing.JLabel();
+        labelLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Recepcion");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         panel.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -117,38 +123,81 @@ public class Recepcion extends javax.swing.JFrame {
             Tabla.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        listaPedido.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        listaPedido.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Saco", "Pantalon", "Abrigo", "Camisa", "Playera", "Corbata", "Chamarra" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listaPedido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listaPedido.setAutoscrolls(false);
+        listaPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        listaPedido.setName("Seleccione"); // NOI18N
+        listaPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPedidoMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaPedido);
+
+        btnAgregarCarrito.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        btnAgregarCarrito.setText("Agregar a carrito");
+        btnAgregarCarrito.setEnabled(false);
+        btnAgregarCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCarritoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
+        jLabel1.setText("Seleccione prenda a agregar");
+
         org.jdesktop.layout.GroupLayout panel2Layout = new org.jdesktop.layout.GroupLayout(panel2);
         panel2.setLayout(panel2Layout);
         panel2Layout.setHorizontalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel2Layout.createSequentialGroup()
-                .add(ScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                .addContainerGap())
+                .add(panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(ScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 164, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(jLabel1)
+                    .add(panel2Layout.createSequentialGroup()
+                        .add(39, 39, 39)
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panel2Layout.createSequentialGroup()
+                        .add(22, 22, 22)
+                        .add(btnAgregarCarrito, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(ScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .add(panel2Layout.createSequentialGroup()
+                .add(ScrollPane, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 161, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jLabel1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(btnAgregarCarrito)
+                .add(34, 34, 34))
         );
 
-        panel3.setBackground(new java.awt.Color(255, 255, 255));
+        panel3.setBackground(new java.awt.Color(204, 255, 255));
 
-        labelAdquirir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
-        labelAdquirir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labelAdquirir.setText("Seleccione el o los servicios");
-        labelAdquirir.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelGenerarNota.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
+        labelGenerarNota.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelGenerarNota.setText("GENERAR PEDIDO");
+        labelGenerarNota.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        btnAceptar.setBackground(new java.awt.Color(0, 153, 204));
-        btnAceptar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
-        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Aceptar");
-        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAceptarMouseClicked(evt);
-            }
-        });
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+        btnGenerar.setBackground(new java.awt.Color(0, 153, 204));
+        btnGenerar.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
+        btnGenerar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGenerar.setText("Generar");
+        btnGenerar.setEnabled(false);
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
+                btnGenerarActionPerformed(evt);
             }
         });
 
@@ -158,44 +207,25 @@ public class Recepcion extends javax.swing.JFrame {
             panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(labelAdquirir, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(labelGenerarNota, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .add(panel3Layout.createSequentialGroup()
-                .add(40, 40, 40)
-                .add(btnAceptar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 144, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, panel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .add(btnGenerar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 144, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(25, 25, 25))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel3Layout.createSequentialGroup()
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(labelAdquirir, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(labelGenerarNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(btnAceptar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(btnGenerar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(42, 42, 42))
         );
 
-        panelLogo.setBackground(new java.awt.Color(0, 153, 153));
-
-        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Logo.png"))); // NOI18N
-
-        org.jdesktop.layout.GroupLayout panelLogoLayout = new org.jdesktop.layout.GroupLayout(panelLogo);
-        panelLogo.setLayout(panelLogoLayout);
-        panelLogoLayout.setHorizontalGroup(
-            panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panelLogoLayout.createSequentialGroup()
-                .add(19, 19, 19)
-                .add(labelLogo)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelLogoLayout.setVerticalGroup(
-            panelLogoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLogoLayout.createSequentialGroup()
-                .add(0, 154, Short.MAX_VALUE)
-                .add(labelLogo))
-        );
-
         panel4.setBackground(new java.awt.Color(255, 255, 255));
+        panel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Recepción", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Microsoft YaHei Light", 1, 14))); // NOI18N
 
         labelNumeroNota.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 14)); // NOI18N
         labelNumeroNota.setText("Ingrese # Nota:");
@@ -206,6 +236,7 @@ public class Recepcion extends javax.swing.JFrame {
         btnRecibir.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 18)); // NOI18N
         btnRecibir.setForeground(new java.awt.Color(255, 255, 255));
         btnRecibir.setText("Recibir");
+        btnRecibir.setEnabled(false);
         btnRecibir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRecibirActionPerformed(evt);
@@ -223,34 +254,34 @@ public class Recepcion extends javax.swing.JFrame {
             .add(panel4Layout.createSequentialGroup()
                 .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(panel4Layout.createSequentialGroup()
-                        .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(panel4Layout.createSequentialGroup()
-                                .add(35, 35, 35)
-                                .add(panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                    .add(labelNumeroNota)))
-                            .add(panel4Layout.createSequentialGroup()
-                                .add(55, 55, 55)
-                                .add(btnRecibir)))
-                        .add(0, 29, Short.MAX_VALUE))
+                        .add(35, 35, 35)
+                        .add(btnRecibir))
+                    .add(panel4Layout.createSequentialGroup()
+                        .add(19, 19, 19)
+                        .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panel4Layout.createSequentialGroup()
+                        .add(27, 27, 27)
+                        .add(labelNumeroNota))
                     .add(panel4Layout.createSequentialGroup()
                         .addContainerGap()
-                        .add(labelInformacion, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel4Layout.setVerticalGroup(
             panel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panel4Layout.createSequentialGroup()
-                .add(20, 20, 20)
+                .add(77, 77, 77)
                 .add(labelNumeroNota)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(18, 18, 18)
                 .add(fieldNumeroNota, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(27, 27, 27)
+                .add(18, 18, 18)
                 .add(btnRecibir)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 59, Short.MAX_VALUE)
-                .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 199, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(56, 56, 56))
+                .add(53, 53, 53)
+                .add(labelInformacion, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 74, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
+
+        labelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Logo.png"))); // NOI18N
 
         org.jdesktop.layout.GroupLayout panelLayout = new org.jdesktop.layout.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -259,62 +290,68 @@ public class Recepcion extends javax.swing.JFrame {
             .add(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(panelLayout.createSequentialGroup()
+                        .add(31, 31, 31)
+                        .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(panelLayout.createSequentialGroup()
+                        .add(41, 41, 41)
+                        .add(labelLogo)))
                 .add(18, 18, 18)
-                .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(panel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(panelLogo, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(panel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, panelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(panel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(panel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(panelLayout.createSequentialGroup()
-                        .add(0, 8, Short.MAX_VALUE)
-                        .add(panelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(panel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(panelLayout.createSequentialGroup()
-                                .add(panelLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(14, 14, 14)
-                                .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                        .add(labelLogo)
+                        .add(18, 18, 18)
+                        .add(panel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(56, 56, 56)))
+                .add(73, 73, 73))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(layout.createSequentialGroup()
-                .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 21, Short.MAX_VALUE))
+            .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+            .add(panel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 463, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-        
-        // Despues de agregar nota
-        Login log = new Login();
-        log.setVisible( true );
-        this.dispose();
-    }//GEN-LAST:event_btnAceptarMouseClicked
-
     private void btnRecibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecibirActionPerformed
-        // TODO add your handling code here:
+        //
     }//GEN-LAST:event_btnRecibirActionPerformed
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        //
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void btnAgregarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCarritoActionPerformed
+        prendaSeleccionada = listaPedido.getSelectedValue();
+        colorPrenda = JOptionPane.showInputDialog("Ingresa el color de "+prendaSeleccionada+":");
+        
+        /*   Si ingreso el color   */
+        if (colorPrenda!= null){
+            btnGenerar.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_btnAgregarCarritoActionPerformed
+
+    private void listaPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPedidoMouseClicked
+        btnAgregarCarrito.setEnabled(true);
+    }//GEN-LAST:event_listaPedidoMouseClicked
 
     /**
      * @param args argumentos
@@ -353,18 +390,21 @@ public class Recepcion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane ScrollPane;
     private javax.swing.JTable Tabla;
-    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAgregarCarrito;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnRecibir;
     private javax.swing.JTextField fieldNumeroNota;
-    private javax.swing.JLabel labelAdquirir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelGenerarNota;
     private javax.swing.JLabel labelInformacion;
     private javax.swing.JLabel labelLogo;
     private javax.swing.JLabel labelNumeroNota;
+    private javax.swing.JList<String> listaPedido;
     private javax.swing.JPanel panel;
     private javax.swing.JPanel panel2;
     private javax.swing.JPanel panel3;
     private javax.swing.JPanel panel4;
-    private javax.swing.JPanel panelLogo;
     // End of variables declaration//GEN-END:variables
 
 }

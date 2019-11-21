@@ -70,17 +70,17 @@ public class Registro extends javax.swing.JFrame {
 
         btnRegistro.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnRegistro.setText("Registrarse");
-        btnRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistroMouseClicked(evt);
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
             }
         });
 
         btnAtras.setFont(new java.awt.Font("Microsoft YaHei Light", 1, 12)); // NOI18N
         btnAtras.setText("Atras");
-        btnAtras.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAtrasMouseClicked(evt);
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
             }
         });
 
@@ -181,7 +181,7 @@ public class Registro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistroMouseClicked
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         // Lectura de campos (fields)
         String nombre = fieldNombre.getText();
         String usuario = fieldUsuario.getText();
@@ -237,13 +237,13 @@ public class Registro extends javax.swing.JFrame {
         Login log = new Login();
         log.setVisible( true );
         this.dispose();
-    }//GEN-LAST:event_btnRegistroMouseClicked
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
-    private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         Login log = new Login();
         log.setVisible( true );
         this.dispose();
-    }//GEN-LAST:event_btnAtrasMouseClicked
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public static void registro(String args[]) {
         try {
